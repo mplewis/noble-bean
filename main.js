@@ -7,6 +7,8 @@ var BEAN_SERIAL_SERVICE_UUID = 'a495ff10c5b14b44b5121370f02d74de';
 var BEAN_SERIAL_CHAR_UUID = 'a495ff11c5b14b44b5121370f02d74de';
 var MY_BEAN_NAME = 'Lewey\'s Bean';
 
+Buffer.prototype.toByteArray = function() { return Array.prototype.slice.call(this, 0); };
+
 var connectedBean = null;
 
 noble.on('stateChange', function(state) {
@@ -38,6 +40,12 @@ noble.on('discover', function(peripheral) {
             console.log('  ' + service.uuid);
               if (err) throw err;
               characteristics.forEach(function(characteristic) {
+                setInterval(function() {
+                  characteristic.read(function(err, data) {
+                    if (err) throw err;
+                    console.log('Data from serial: ' + data.toByteArray());
+                  });
+                }, 1000);
                 console.log('    ' + characteristic.uuid + ' (Bean Serial)');
                 console.log('Subscribing to Bean serial characteristic...');
                 characteristic.notify(true, function(err) {

@@ -1,0 +1,15 @@
+{
+  "name": "noble-bean",
+  "version": "0.0.0",
+  "description": "A Node app that talks to your LightBlue Bean.",
+  "main": "main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Matthew Lewis",
+  "license": "MIT",
+  "dependencies": {
+    "lodash": "^2.4.1",
+    "noble": "^0.3.1"
+  }
+}

@@ -5,7 +5,7 @@ var _ = require('lodash');
 
 var BEAN_SERIAL_SERVICE_UUID = 'a495ff10c5b14b44b5121370f02d74de';
 var BEAN_SERIAL_CHAR_UUID = 'a495ff11c5b14b44b5121370f02d74de';
-var MY_BEAN_NAME = 'Lewey\'s Bean';
+var MY_BEAN_UUID = '03953a79bcd444f1baedba9e201f42f4';
 
 Buffer.prototype.toByteArray = function() { return Array.prototype.slice.call(this, 0); };
 
@@ -26,9 +26,9 @@ noble.on('discover', function(peripheral) {
     var name = peripheral.advertisement.localName;
     var uuid = peripheral.uuid;
     console.log(util.format('Bean discovered (%s @ %s)', name, uuid));
-    if (name === MY_BEAN_NAME) {
+    if (uuid === MY_BEAN_UUID) {
       noble.stopScanning();
-      console.log('Connecting to ' + MY_BEAN_NAME + '...');
+      console.log('Connecting to ' + name + '...');
       peripheral.connect(function(err) {
         if (err) throw err;
         console.log('Connected!');
